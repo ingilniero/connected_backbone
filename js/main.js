@@ -5,17 +5,18 @@ var Person = Backbone.Model.extend({
     ocuppation: 'worker'
   },
 
+  //Called on object.(object, {validate: true} ) or save()
+  validate: function( attrs, options ) {
+    if (attrs.age < 0 ){
+      return "Age must be positive.";
+    }
+
+    if(!attrs.name ){
+      return "Every person must have a name.";
+    }
+  },
+
   work: function(){
     return this.get('name') + ' is working';
   }
 });
-
-// var Person = function(config) {
-//   this.name = config.name;
-//   this.age = config.age;
-//   this.ocuppation = config.ocuppation;
-// };
-
-// Person.prototype.work = function() {
-//   return this.name + " is working";
-// };
