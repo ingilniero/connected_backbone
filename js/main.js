@@ -33,6 +33,8 @@
   App.Views.Task = Backbone.View.extend({
     tagName: 'li',
 
+    template: template('taskTemplate'),
+
     events: {
       'click': 'showAlert'
     },
@@ -42,7 +44,8 @@
     },
 
     render: function(){
-      this.$el.html( this.model.get('title') );
+      var template = this.template(this.model.toJSON());
+      this.$el.html( template );
       return this;
     }
   });
