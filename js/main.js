@@ -35,12 +35,17 @@
 
     template: template('taskTemplate'),
 
-    events: {
-      'click': 'showAlert'
+    initialize: function(){
+      this.model.on('change', this.render, this);
     },
 
-    showAlert: function(){
-      alert('you clicked me');
+    events: {
+      'click .edit': 'editTask'
+    },
+
+    editTask: function(){
+      var newTaskTitle = prompt("What would you like to change the text to?", this.model.get('title'));
+      this.model.set('title', newTaskTitle);
     },
 
     render: function(){
