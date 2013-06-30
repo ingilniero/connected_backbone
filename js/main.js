@@ -43,16 +43,26 @@
 
     initialize: function(){
       this.model.on('change', this.render, this);
+      this.model.on('destroy', this.remove, this);
     },
 
     events: {
-      'click .edit': 'editTask'
+      'click .edit': 'editTask',
+      'click .delete': 'destroyTask'
     },
 
     editTask: function(){
       var newTaskTitle = prompt("What would you like to change the text to?", this.model.get('title'));
       if (! newTaskTitle ) return;
       this.model.set('title', newTaskTitle, { validate: true });
+    },
+
+    destroyTask: function(){
+      this.model.destroy();
+    },
+
+    remove: function(){
+      this.$el.remove();
     },
 
     render: function(){
