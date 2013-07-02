@@ -11,9 +11,22 @@ class TasksController < ApplicationController
   end
 
   def show
-    @task = Task.find(1)
+    @task = Task.find(params[:id])
     respond_to do |format|
       format.json { render :json => @task.to_json }
     end
+  end
+
+  def update
+    @task = Task.find(params[:id])
+    @task.update_attributes(parameters)
+
+    respond_to do | format |
+      format.json { render :json => @task.to_json }
+    end
+  end
+
+  def parameters
+    params.require(:task).permit(:id, :title, :completed)
   end
 end
