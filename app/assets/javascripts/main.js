@@ -10,8 +10,7 @@
   App.Models.Task = Backbone.Model.extend({
     defaults: {
       title: '',
-      completed: false,
-      id: ''
+      completed: false
     },
     urlRoot: 'tasks'
   });

@@ -1,6 +1,16 @@
 class TasksController < ApplicationController
   ActiveRecord::Base.include_root_in_json = false
 
+  def create
+    @task = Task.new parameters
+    @task.save
+
+    respond_to do |format|
+      format.html { render :html => @tasks }
+      format.json { render :json => @tasks.to_json }
+    end
+  end
+
   def index
     @tasks = Task.all
 
